@@ -44,8 +44,12 @@ namespace CanvasArtWorks.Controllers
         }
 
         // GET: Artworks/Create
-        public IActionResult Create()
+        public IActionResult Create(int id = 0)
         {
+            if (id != 0)
+            {
+                return View(_context.Artworks.Find(id));
+            }
             return View();
         }
 
@@ -54,68 +58,25 @@ namespace CanvasArtWorks.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Desc,Image,CreatedAt")] Artwork artwork)
+        public async Task<IActionResult> Create([Bind("Id,Name,Desc,Image,Snapshot")] Artwork artwork)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(artwork);
+                artwork.CreatedAt = DateTime.Now;
+                if (artwork.Id == 0)
+                {
+                    _context.Add(artwork);
+                }
+                
+                else
+                {
+                    _context.Update(artwork);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(artwork);
         }
-
-        // GET: Artworks/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var artwork = await _context.Artworks.FindAsync(id);
-            if (artwork == null)
-            {
-                return NotFound();
-            }
-            return View(artwork);
-        }
-
-        // POST: Artworks/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Desc,Image,CreatedAt")] Artwork artwork)
-        {
-            if (id != artwork.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(artwork);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ArtworkExists(artwork.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(artwork);
-        }
-
         // GET: Artworks/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

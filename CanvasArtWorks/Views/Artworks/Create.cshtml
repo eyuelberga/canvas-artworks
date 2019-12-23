@@ -13,10 +13,10 @@
 </head>
 <body>
 
-<h4>Artwork</h4>
+<h4>Make an Artwork</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -24,31 +24,186 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Desc" class="control-label"></label>
-                <input asp-for="Desc" class="form-control" />
-                <span asp-validation-for="Desc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+          <div class="form-group">
+            <label asp-for="Desc" class="control-label"></label>
+            <textarea asp-for="Desc" class="form-control" ></textarea>
+            <span asp-validation-for="Desc" class="text-danger"></span>
+          </div>
+          <div class="form-group hide" hidden>
+            <label asp-for="Image" class="control-label"></label>
+            <input id="image" asp-for="Image" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+          </div>
+            <div class="form-group hide" hidden>
+                                <label asp-for="Snapshot" class="control-label"></label>
+                                <input id="snapshot" asp-for="Snapshot" class="form-control" />
+                                <span asp-validation-for="Snapshot" class="text-danger"></span>
+                              </div>
+          <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+          </div>
+          
         </form>
+    </div>
+    <div class="col-md-10">
+    
+                 <div class="one"></div>
+   
     </div>
 </div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script src="~/lib/jquery-1.8.2.js"></script>
+    <script src="~/lib/fastclick.js"></script>
+    <script src="~/lib/react-16.1.1.js"></script>
+    <script src="~/lib/react-dom-16.1.1.js"></script>
+    <script src="~/lib/react-dom-factories-1.0.2.js"></script>
+    <script src="~/lib/create-react-class-15.6.2.js"></script>
+    <script src="~/lib/react-15.1.0.js"></script>
+    <!--<script src="react-0.14.7.js"></script>-->
+    <!--<script src="react-0.13.3.js"></script>-->
+    <!--<script src="react-0.10.0.js"></script>-->
+    <script src="~/lib/js/literallycanvas.js"></script>
+<script type="text/javascript">
+  LC.setDefaultImageURLPrefix('https://localhost:5001/lib/img');
+
+
+      var lc = null;
+      
+      var updateSVG = function() {
+        if (!lc) return;
+        $("#image").attr("value",lc.getSVGString()) ;
+         $("#snapshot").attr("value",JSON.stringify(lc.getSnapshot())) ;
+        
+      }
+
+      var backgroundImage = new Image();
+      window.debugImage = backgroundImage;
+
+      // the only LC-specific thing we have to do
+      var containerOne = document.getElementsByClassName('one')[0];
+
+      var MyTool = function() {
+        var self = this;
+
+        return {
+          usesSimpleAPI: false,  // DO NOT FORGET THIS!!!
+          name: 'ImageTool',
+          iconName: 'line',
+          optionsStyle: null,
+
+          didBecomeActive: function(lc) {
+            const onPointerDown = function(pt) {
+              self.currentShape = LC.createShape('Image', {
+                image: backgroundImage, x: pt.x, y: pt.y});
+              lc.setShapesInProgress([self.currentShape]);
+              lc.repaintLayer('main');
+            };
+
+            var onPointerDrag = function(pt) {
+              self.currentShape.x = pt.x;
+              self.currentShape.y = pt.y;
+              lc.setShapesInProgress([self.currentShape]);
+              lc.repaintLayer('main');
+            };
+
+            var onPointerUp = function(pt) {
+              self.currentShape.x = pt.x;
+              self.currentShape.y = pt.y;
+              lc.setShapesInProgress([]);
+              lc.saveShape(self.currentShape);
+            };
+
+            // lc.on() returns a function that unsubscribes us. capture it.
+            self.unsubscribeFuncs = [
+              lc.on('lc-pointerdown', onPointerDown),
+              lc.on('lc-pointerdrag', onPointerDrag),
+              lc.on('lc-pointerup', onPointerUp)
+            ];
+          },
+
+          willBecomeInactive: function(lc) {
+            // call all the unsubscribe functions
+            self.unsubscribeFuncs.map(function(f) { f() });
+          }
+        }
+      };
+
+      // disable scrolling on touch devices so we can actually draw
+      $(document).bind('touchmove', function(e) {
+        if (e.target === document.documentElement) {
+          return e.preventDefault();
+        }
+      });
+
+      var showLC = function() {
+      let s;
+      const str = $("#snapshot").val();
+        try{
+           s = JSON.parse(str);
+        }
+        catch (e) {
+          s = false;
+        }
+
+        lc = LC.init(containerOne, {
+          toolbarPosition: 'bottom',
+          tools: LC.defaultTools.concat([MyTool]),
+          snapshot: s?s:null,
+          defaultStrokeWidth: 2,
+          strokeWidths: [1, 2, 3, 5, 30],
+          backgroundShapes: [
+          ],
+          onInit: function(lc) {
+            console.log('initialized with', lc)
+          }
+          // backgroundColor: '#f00',
+          // watermarkImage: watermarkImage//,
+          // imageSize: {width: 500, height: 300}
+        });
+        window.demoLC = lc;
+       // lc.setWatermarkImage(watermarkImage);
+
+        var save = function() {
+          // localStorage.setItem('drawing', JSON.stringify(lc.getSnapshot()));
+          updateSVG();
+        }
+
+        lc.on('drawingChange', save);
+        lc.on('pan', save);
+        lc.on('zoom', save);
+
+        // lc.setPan(100, 100);
+
+        updateSVG();
+
+      };
+
+      $(document).ready(function() {
+        // disable scrolling on touch devices so we can actually draw
+        $(document).bind('touchmove', function(e) {
+          if (e.target === document.documentElement) {
+            return e.preventDefault();
+          }
+        });
+        showLC();
+      });
+
+      $('#hide-lc').click(function() {
+        if (lc) {
+          lc.teardown();
+          lc = null;
+        }
+      });
+
+      $('#show-lc').click(function() {
+        if (!lc) { showLC(); }
+      });
+    </script>
+
+
 
 </body>
 </html>

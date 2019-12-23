@@ -3,15 +3,17 @@ using System;
 using CanvasArtWorks.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CanvasArtWorks.Migrations
 {
     [DbContext(typeof(ArtworkContext))]
-    partial class ArtworkContextModelSnapshot : ModelSnapshot
+    [Migration("20191223071542_1000")]
+    partial class _1000
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

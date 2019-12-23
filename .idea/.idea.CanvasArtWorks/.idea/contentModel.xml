@@ -16,6 +16,8 @@
         <e p="Migrations" t="Include">
           <e p="20191222141452_inital.Designer.cs" t="Include" />
           <e p="20191222141452_inital.cs" t="Include" />
+          <e p="20191223071542_1000.Designer.cs" t="Include" />
+          <e p="20191223071542_1000.cs" t="Include" />
           <e p="ArtworkContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
@@ -32,7 +34,6 @@
             <e p="Create.cshtml" t="Include" />
             <e p="Delete.cshtml" t="Include" />
             <e p="Details.cshtml" t="Include" />
-            <e p="Edit.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
           </e>
           <e p="Home" t="Include">
