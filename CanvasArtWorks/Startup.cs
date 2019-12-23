@@ -15,6 +15,7 @@ namespace CanvasArtWorks
 {
     public class Startup
     {
+        public static string wwwRootFolder = string.Empty;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -35,6 +36,7 @@ namespace CanvasArtWorks
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            Startup.wwwRootFolder = env.WebRootPath;
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -7,10 +7,16 @@
       <e p="CanvasArtWorks" t="IncludeRecursive">
         <e p="CanvasArtWorks.csproj" t="IncludeRecursive" />
         <e p="Controllers" t="Include">
+          <e p="ArtworksController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
         </e>
         <e p="Data" t="Include">
           <e p="ArtworkContext.cs" t="Include" />
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="20191222141452_inital.Designer.cs" t="Include" />
+          <e p="20191222141452_inital.cs" t="Include" />
+          <e p="ArtworkContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
           <e p="Artwork.cs" t="Include" />
@@ -22,6 +28,13 @@
         </e>
         <e p="Startup.cs" t="Include" />
         <e p="Views" t="Include">
+          <e p="Artworks" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Delete.cshtml" t="Include" />
+            <e p="Details.cshtml" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Index.cshtml" t="Include" />
+          </e>
           <e p="Home" t="Include">
             <e p="Index.cshtml" t="Include" />
             <e p="Privacy.cshtml" t="Include" />
@@ -84,6 +97,37 @@
                 </e>
               </e>
             </e>
+            <e p="create-react-class-15.6.2.js" t="Include" />
+            <e p="css" t="Include">
+              <e p="literallycanvas.css" t="Include" />
+            </e>
+            <e p="fastclick.js" t="Include" />
+            <e p="img" t="Include">
+              <e p="alpha.png" t="Include" />
+              <e p="checkerboard-8x8.png" t="Include" />
+              <e p="dashed-line.png" t="Include" />
+              <e p="ellipse.png" t="Include" />
+              <e p="eraser.png" t="Include" />
+              <e p="eyedropper.png" t="Include" />
+              <e p="hue.png" t="Include" />
+              <e p="line-with-arrow.png" t="Include" />
+              <e p="line.png" t="Include" />
+              <e p="pan.png" t="Include" />
+              <e p="pencil.png" t="Include" />
+              <e p="polygon-cancel.png" t="Include" />
+              <e p="polygon-closed.png" t="Include" />
+              <e p="polygon-open.png" t="Include" />
+              <e p="polygon.png" t="Include" />
+              <e p="rectangle.png" t="Include" />
+              <e p="redo.png" t="Include" />
+              <e p="saturation.png" t="Include" />
+              <e p="screenshot.png" t="Include" />
+              <e p="text.png" t="Include" />
+              <e p="undo.png" t="Include" />
+              <e p="z.png" t="Include" />
+              <e p="zoom-in.png" t="Include" />
+              <e p="zoom-out.png" t="Include" />
+            </e>
             <e p="jquery" t="Include">
               <e p="LICENSE.txt" t="Include" />
               <e p="dist" t="Include">
@@ -92,6 +136,7 @@
                 <e p="jquery.min.map" t="Include" />
               </e>
             </e>
+            <e p="jquery-1.8.2.js" t="Include" />
             <e p="jquery-validation" t="Include">
               <e p="LICENSE.md" t="Include" />
               <e p="dist" t="Include">
@@ -106,6 +151,76 @@
               <e p="jquery.validate.unobtrusive.js" t="Include" />
               <e p="jquery.validate.unobtrusive.min.js" t="Include" />
             </e>
+            <e p="js" t="Include">
+              <e p=".gitignore" t="Include" />
+              <e p=".npmignore" t="Include" />
+              <e p="core" t="Include">
+                <e p="LiterallyCanvas.js" t="Include" />
+                <e p="TextRenderer.js" t="Include" />
+                <e p="actions.js" t="Include" />
+                <e p="bindEvents.js" t="Include" />
+                <e p="canvasRenderer.js" t="Include" />
+                <e p="defaultOptions.js" t="Include" />
+                <e p="fontmetrics.js" t="Include" />
+                <e p="lineEndCapShapes.js" t="Include" />
+                <e p="localization.js" t="Include" />
+                <e p="math.js" t="Include" />
+                <e p="renderSnapshotToImage.js" t="Include" />
+                <e p="renderSnapshotToSVG.js" t="Include" />
+                <e p="shapes.js" t="Include" />
+                <e p="svgRenderer.js" t="Include" />
+                <e p="util.js" t="Include" />
+              </e>
+              <e p="ie_customevent.js" t="Include" />
+              <e p="ie_setLineDash.js" t="Include" />
+              <e p="index.js" t="Include" />
+              <e p="literallycanvas-core.js" t="Include" />
+              <e p="literallycanvas-core.min.js" t="Include" />
+              <e p="literallycanvas.js" t="Include" />
+              <e p="literallycanvas.min.js" t="Include" />
+              <e p="optionsStyles" t="Include">
+                <e p="font.js" t="Include" />
+                <e p="line-options-and-stroke-width.js" t="Include" />
+                <e p="null.js" t="Include" />
+                <e p="optionsStyles.js" t="Include" />
+                <e p="polygon-and-stroke-width.js" t="Include" />
+                <e p="stroke-or-fill.js" t="Include" />
+                <e p="stroke-width.js" t="Include" />
+              </e>
+              <e p="reactGUI" t="Include">
+                <e p="ClearButton.js" t="Include" />
+                <e p="ColorWell.js" t="Include" />
+                <e p="LiterallyCanvas.js" t="Include" />
+                <e p="Options.js" t="Include" />
+                <e p="Picker.js" t="Include" />
+                <e p="React-shim.js" t="Include" />
+                <e p="ReactDOM-shim.js" t="Include" />
+                <e p="StrokeWidthPicker.js" t="Include" />
+                <e p="UndoRedoButtons.js" t="Include" />
+                <e p="ZoomButtons.js" t="Include" />
+                <e p="createSetStateOnEventMixin.js" t="Include" />
+                <e p="createToolButton.js" t="Include" />
+                <e p="init.js" t="Include" />
+                <e p="initDOM.js" t="Include" />
+              </e>
+              <e p="tools" t="Include">
+                <e p="Ellipse.js" t="Include" />
+                <e p="Eraser.js" t="Include" />
+                <e p="Eyedropper.js" t="Include" />
+                <e p="Line.js" t="Include" />
+                <e p="Pan.js" t="Include" />
+                <e p="Pencil.js" t="Include" />
+                <e p="Polygon.js" t="Include" />
+                <e p="Rectangle.js" t="Include" />
+                <e p="SelectShape.js" t="Include" />
+                <e p="Text.js" t="Include" />
+                <e p="base.js" t="Include" />
+              </e>
+            </e>
+            <e p="react-15.1.0.js" t="Include" />
+            <e p="react-16.1.1.js" t="Include" />
+            <e p="react-dom-16.1.1.js" t="Include" />
+            <e p="react-dom-factories-1.0.2.js" t="Include" />
           </e>
         </e>
       </e>
